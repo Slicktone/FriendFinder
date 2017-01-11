@@ -11,7 +11,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 
-// Server Routes will be found on api-routes.js
+// Server Routes
 
 // Starting the Server
 app.listen(PORT, function() {
