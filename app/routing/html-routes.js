@@ -6,11 +6,11 @@ var path = require('path');
 module.exports = function(app) {
 // GET route that goes to the Survey Page
     app.get('/survey', function (request, response) {
-        res.sendFile(path.join(__dirname, '/../public/survey.html'));
+        res.sendFile(path.join(__dirname + '/../public/survey.html'));
     });
 
     // Default USE route that leads to Home Page.
     app.use(function(request, response, next) {
-        res.sendFile(path.join(__dirname, '/../public/home.html'));
+        res.sendFile(path.join(__dirname + '/../public/home.html'));
     });
 };
