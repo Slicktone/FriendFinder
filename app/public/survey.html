@@ -165,11 +165,47 @@
 
 	</div>
 
-	<button type="submit" class="btn btn-primary btn-block" style="margin: 2% 0 2% 0"><i class="fa fa-check-circle" aria-hidden="true"></i> Submit</button>
- <div style="border-top: solid; border-color: lightgrey; border-width: 1px; padding-top:2%">
+	{#<button type="submit" class="btn btn-primary btn-block" style="margin: 2% 0 2% 0"><i class="fa fa-check-circle" aria-hidden="true"></i> Submit</button>
+ 		<div style="border-top: solid; border-color: lightgrey; border-width: 1px; padding-top:2%">
                 <a href="/api/friends" target="_blank">API Friends List</a> | <a href="https://github.com/Slicktone/FriendFinder" target="_blank">GitHub Repo</a>
-            </div>
-
+		</div>#}
+	<script type="text/javascript">
+		$("#submit").on("click", function() {
+			// when the submit button is clicked, 
+			// run function CHECKING that all data entered is good
+			function completeData() {
+				var dataEntered = true;
+				// statement checking for missing data
+				$(".form-control").each(function() {
+					if($(this).val() === "")
+					dataEntered = false;
+				})
+				return dataEntered;
+			}
+				// statement checking if everything is entered
+				if(completeData() === true) {
+					// create a friend object with their information
+					var friendInput = {
+						name: $("#name").val(),
+						photo: $("#photo").val(),
+						scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
+	           }
+			   // AJAX Post will be needed for the URL
+			   var currentURL = window.location.origin;
+			   // Created AJAX Post for the Friend Object Information
+			   $.post(URL + "/api/friends", friendInput + function(data){
+				    $("#matchName").text(data.name);
+			   		$("matchPhoto").attr("src", data.photo);
+					// modal match
+					$("#resultModal").modal("toggle");
+			   });
+				} else {
+					alert("You have missing information, please fill out all fields.");
+				}
+				return false;
+		});
+	</script>
+			
 
 </body>
 </html>
